@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
+    @IBOutlet weak var loginButton: UIButton!
     let viewModel = LoginViewModel()
     var characters: [Character] = []
 
@@ -26,6 +27,9 @@ class LoginViewController: UIViewController {
         viewModel.login(
             email: emailTextField.text!, password: passwordTextField.text!
         ) {
+            DispatchQueue.main.async {
+                self.loginButton.isEnabled = false
+            }
             DispatchQueue.global(qos: .userInitiated).async {
                 self.viewModel.saveCharacters { characters in
                     DispatchQueue.main.async {

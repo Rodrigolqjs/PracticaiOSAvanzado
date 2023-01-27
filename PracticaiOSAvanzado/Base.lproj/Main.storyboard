@@ -80,6 +80,7 @@
                     </view>
                     <connections>
                         <outlet property="emailTextField" destination="pR6-Uo-D6c" id="3js-r3-0Di"/>
+                        <outlet property="loginButton" destination="deN-8R-5Xf" id="Wax-67-TnC"/>
                         <outlet property="passwordTextField" destination="PVx-wk-Wqa" id="Gns-fz-1z5"/>
                         <segue destination="Qo0-bo-Ijl" kind="show" identifier="goToTable" id="Y3j-sQ-uq0"/>
                     </connections>
