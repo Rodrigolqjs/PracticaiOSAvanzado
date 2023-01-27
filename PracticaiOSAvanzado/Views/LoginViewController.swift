@@ -25,14 +25,7 @@ class LoginViewController: UIViewController {
     @IBAction func onLoginButtonTap(_ sender: Any) {
         viewModel.login(
             email: emailTextField.text!, password: passwordTextField.text!
-        ) { token, error in
-            if let error = error {
-                print(error)
-            }
-            guard let token = token else {
-                return print("no hay token \(token ?? "")")
-            }
-            self.viewModel.loginSaveToken(token: token)
+        ) {
             DispatchQueue.global(qos: .userInitiated).async {
                 self.viewModel.saveCharacters { characters in
                     DispatchQueue.main.async {

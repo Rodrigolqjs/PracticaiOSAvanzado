@@ -34,7 +34,9 @@ final class CharactersTableViewModel {
                 id: $0.id!,
                 favorite: $0.favorite,
                 name: $0.name!,
-                description: $0.desc!
+                description: $0.desc!,
+                latitud: $0.longitude,
+                longitude: $0.latitude
             )
         }
         print("despues del caste a \(characters)")

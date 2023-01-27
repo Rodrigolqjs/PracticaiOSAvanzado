@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Character: Decodable {
+struct Character: Decodable, Equatable {
     let photo: URL
     let id: String
     let favorite: Bool

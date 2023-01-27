@@ -18,8 +18,7 @@ class CharactersTableViewController: UITableViewController {
         if(!viewModel.characters.isEmpty) {
             characters = viewModel.characters
         }
-        tableView.estimatedRowHeight = 70
-        tableView.rowHeight = UITableView.automaticDimension
+        self.title = "Characters"
         tableView?.register(
             UINib(nibName: "CustomTableViewCell", bundle: nil),
             forCellReuseIdentifier: "customCell"
@@ -54,6 +53,17 @@ class CharactersTableViewController: UITableViewController {
                     )
         )
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+      cell.center.x += 50
+      UIView.animate(withDuration: 0.5) {
+        cell.center.x -= 50
+      }
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

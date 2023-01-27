@@ -8,20 +8,23 @@
 import Foundation
 
 enum NetworkError: Error {
-  case malformedURL
-  case noData
-  case statusCode(code: Int?)
-  case decodingFailed
-  case unknown
+    case malformedURL
+    case noData
+    case statusCode(code: Int?)
+    case decodingFailed
+    case unknown
+    case noToken
 }
 
 class NetworkModel {
 
-    private var token: String?
+//    private var token: String?
+    private var session: URLSession = .shared
 
-    convenience init(token: String) {
+    convenience init(urlSession: URLSession = .shared) {
         self.init()
-        self.token = token
+        self.session = urlSession
+        
     }
 
     func networkLogin(user: String, password: String, completion: ((String?, Error?) -> Void)? = nil) {
@@ -38,7 +41,7 @@ class NetworkModel {
         urlRequest.httpMethod = "POST"
         urlRequest.setValue("Basic \(base64LoginString)", forHTTPHeaderField: "Authorization")
 
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
             guard error == nil else {
                 completion?(nil, NetworkError.unknown)
                 return
@@ -59,7 +62,6 @@ class NetworkModel {
                 return
             }
 
-            self.token = response
             completion?(response, nil)
         }
 
@@ -67,7 +69,11 @@ class NetworkModel {
     }
 
     func networkGetHeroes(token: String, completion: @escaping ([Character], Error?) -> Void) {
-        guard let url = URL(string: "https://dragonball.keepcoding.education/api/heros/all"), let token = self.token else {
+        if (token == "") {
+            completion([], NetworkError.noToken)
+            return
+        }
+        guard let url = URL(string: "https://dragonball.keepcoding.education/api/heros/all") else {
             completion([], NetworkError.malformedURL)
             return
         }
@@ -80,7 +86,7 @@ class NetworkModel {
         urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         urlRequest.httpBody = urlComponents.query?.data(using: .utf8)
 
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
             guard error == nil else {
                 completion([], NetworkError.unknown)
                 return
@@ -102,8 +108,11 @@ class NetworkModel {
     }
 
     func networkGetLocalizacionHeroe(token: String, id: String, completion: (([CharacterCoords], Error?) -> Void)? = nil) {
-        guard let url = URL(string: "https://dragonball.keepcoding.education/api/heros/locations"),
-              let token = self.token else {
+        if (token == "") {
+            completion?([], NetworkError.noToken)
+            return
+        }
+        guard let url = URL(string: "https://dragonball.keepcoding.education/api/heros/locations") else {
             completion?([], NetworkError.malformedURL)
             return
         }
@@ -116,7 +125,7 @@ class NetworkModel {
         urlRequest.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         urlRequest.httpBody = urlComponents.query?.data(using: .utf8)
 
-        let task = URLSession.shared.dataTask(with: urlRequest) { (data, response, error) in
+        let task = session.dataTask(with: urlRequest) { (data, response, error) in
             guard error == nil else {
                 completion?([], NetworkError.unknown)
                 return
