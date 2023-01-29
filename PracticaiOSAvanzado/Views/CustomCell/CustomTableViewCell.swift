@@ -18,6 +18,6 @@ class CustomTableViewCell: UITableViewCell {
     func set(customCellModel: CustomCellModel) {
         self.nameLabel.text = customCellModel.name
         self.descriptionLabel.text = customCellModel.description
-        self.imageView?.setImage(url:  customCellModel.photo.absoluteString)
+        self.characterImage.setImage(url:  customCellModel.photo.absoluteString)
     }
 }

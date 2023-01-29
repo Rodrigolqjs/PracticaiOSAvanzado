@@ -39,7 +39,6 @@ final class CharactersTableViewModel {
                 longitude: $0.latitude
             )
         }
-        print("despues del caste a \(characters)")
     }
     
 }

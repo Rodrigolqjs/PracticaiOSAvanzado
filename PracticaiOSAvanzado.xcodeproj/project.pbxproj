@@ -502,7 +502,6 @@
 				DEVELOPMENT_TEAM = 5U2MYSX27B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PracticaiOSAvanzado/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use to locate heroes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -531,7 +530,6 @@
 				DEVELOPMENT_TEAM = 5U2MYSX27B;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = PracticaiOSAvanzado/Info.plist;
-				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Use to locate heroes";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
