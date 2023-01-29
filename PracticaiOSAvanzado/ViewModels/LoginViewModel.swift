@@ -26,13 +26,13 @@ final class LoginViewModel {
         self.coreDataManager = coreDataManager
     }
     
-    func login(email: String, password: String, completion: @escaping () -> Void) {
+    func login(email: String, password: String, completion: @escaping (Error?) -> Void) {
         //Para borrar core data
         coreDataManager.deleteCoreData(entityName: "CharacterCD")
         //
         networkModel.networkLogin(user: email, password: password) { token, error in
             if let error = error {
-                print(error)
+                completion(error)
             }
             guard let token = token else {
                 return print("no hay token \(token ?? "")")
@@ -43,7 +43,7 @@ final class LoginViewModel {
             }
             print(token)
             self.keyChain.set(token, forKey: self.tokenKey)
-            completion()
+            completion(nil)
         }
     }
     
