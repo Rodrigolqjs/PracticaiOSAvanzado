@@ -38,10 +38,9 @@ class LoginViewController: UIViewController {
                     self.loginButton.isEnabled = false
                 }
                 DispatchQueue.global(qos: .userInitiated).async {
-                    self.viewModel.saveCharacters { characters in
+                    self.viewModel.saveCharacters {
                         DispatchQueue.main.async {
                             self.loading.stopAnimating()
-                            self.characters = characters
                             self.performSegue(withIdentifier: "goToTable", sender: nil)
                         }
                     }
